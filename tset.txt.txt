@@ -1,0 +1,58 @@
+ File ini di simpan pada : Fri Jan 03 18:47:24 2014
+
+ ID		: 1
+ Nama		: Insan Muslim
+ RT/RW		: 2/5
+ Kampung		: Cidulang
+ Kecamatan	: Gegerbitung
+ Jenis Kelamin	: L
+ Pekerjaan	: Karyawan
+
+ ID		: 2
+ Nama		: Nadiar A Syariful
+ RT/RW		: 3/2
+ Kampung		: Cisitu
+ Kecamatan	: Cisitu
+ Jenis Kelamin	: L
+ Pekerjaan	: Wiraswasta
+
+ ID		: 3
+ Nama		: Lia Mulia
+ RT/RW		: 4/6
+ Kampung		: Sekeloa
+ Kecamatan	: Sekeloa
+ Jenis Kelamin	: P
+ Pekerjaan	: Karyawan
+
+ ID		: 4
+ Nama		: Mahmud Mualim
+ RT/RW		: 1/3
+ Kampung		: Pucung
+ Kecamatan	: Pluit
+ Jenis Kelamin	: L
+ Pekerjaan	: Wiraswasta
+
+ ID		: 5
+ Nama		: Nani Masaka
+ RT/RW		: 3/6
+ Kampung		: Sekeloa
+ Kecamatan	: Sekeloa
+ Jenis Kelamin	: P
+ Pekerjaan	: Ibu rumah tangga
+
+ ID		: 6
+ Nama		: Yatta Dekita
+ RT/RW		: 1/3
+ Kampung		: Cijurei
+ Kecamatan	: Gegerbitung
+ Jenis Kelamin	: P
+ Pekerjaan	: Buruh
+
+ ID		: 7
+ Nama		: N
+ RT/RW		: 9/4
+ Kampung		: kampung
+ Kecamatan	: kecamatan
+ Jenis Kelamin	: P
+ Pekerjaan	: pekr
+
