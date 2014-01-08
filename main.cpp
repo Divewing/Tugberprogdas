@@ -9,6 +9,8 @@
 #include <windows.h>
 
 
+//Kelompok 4 : Zakat
+
 using namespace std;
 
 // --------------   record ------------------- //
