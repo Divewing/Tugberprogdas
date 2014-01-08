@@ -62,9 +62,9 @@ void ukuranwindow(int lebar, int tinggi){
     rect.Bottom = tinggi - 1;
     rect.Right = lebar - 1;
 
-    HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);     
-    SetConsoleScreenBufferSize(Handle, kordinat);         
-    SetConsoleWindowInfo(Handle, TRUE, &rect);            
+    HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleScreenBufferSize(Handle, kordinat);
+    SetConsoleWindowInfo(Handle, TRUE, &rect);
     }
 
 
@@ -84,7 +84,7 @@ biodata inptbio(){
 	cout << " Jenis Kelamin\n (L/P)\t\t: ";
 	 cin >> inpt.jk;
 	 if((toupper(inpt.jk) != 'L')&&(toupper(inpt.jk) != 'P')){
-	 	cout << "Data yang anda inputkan tidak benar!!"<<endl;
+	 	cout << " Data yang anda inputkan tidak benar!! ";
 	 }
 	}while((toupper(inpt.jk) != 'L')&&(toupper(inpt.jk) != 'P'));
 	cout << " Pekerjaan\t: ";
@@ -126,7 +126,7 @@ zakatprof hitprof(){
 	zakatprof prof;
     char ans;
     float total;
-    
+
     prof.statprof = 1;
     cout << " Total penghasilan bulan ini, Rp. "; cin >> prof.income;
     cout << "\n Apakah mempunyai tunggakan? [y/N] "; cin >> ans;
@@ -170,7 +170,7 @@ zakatemas resetmas(){
 
 zakatprof resetprof(){
 	zakatprof prof;
-	
+
     prof.statprof = 0;
     prof.income = 0;
     prof.tunggakan = 0;
@@ -182,7 +182,8 @@ zakatprof resetprof(){
 
 
 int kat(){
-	int pil,ketemu = 0;
+	int ketemu = 0,cat;
+	char pil;
 	do{
 		cout << " [1]. Nama"<<endl;
 		cout << " [2]. Kampung"<<endl;
@@ -192,28 +193,32 @@ int kat(){
 		cout << " Cari berdasarkan : ";
 		cin >> pil;
 		switch(pil){
-			case 1 :
+			case '1' :
 				ketemu = 1;
+				cat = 1;
 				break;
-			case 2 :
+			case '2' :
 				ketemu = 1;
+				cat = 2;
 				break;
-			case 3 :
+			case '3' :
 				ketemu = 1;
+				cat = 3;
 				break;
-			case 4 :
+			case '4' :
 				ketemu = 1;
+				cat = 4;
 				break;
 			default :
 				cout << endl;
-				cout << " Pilihan yang anda masukan tidak terdaftar"<<endl;
-				cout << " Tekan tombol sembarang untuk memilih kembali"<<endl;
+				cout << " Pilihan yang Anda masukan tidak terdaftar"<<endl;
+				cout << " Tekan tombol sembarang untuk memilih kembali.. "<<endl;
 				getch();
 				break;
 		}
 	}while(ketemu!=1);
-	
-	return pil;
+
+	return cat;
 }
 
 // --------------  prosedur ------------------- //
@@ -280,7 +285,7 @@ void tempubahdaf(biodata *tempbio){
 	 		fflush(stdin);cin.get(tempbio->pekerjaan,30);
 	 		break;
 	 	default:
-	 		cout << "Anda memasukan pilihan yang calah, mohon periksa lagi ";
+	 		cout << " Anda memasukan pilihan yang tidak tepat, mohon periksa lagi ";
 	 		break;
 	}
 	cout << endl;
@@ -414,7 +419,7 @@ void simpanbio(int id, biodata tempbio, list *L){
 		strcpy(node->personal.kec,tempbio.kec);
 		node->personal.jk = tempbio.jk;
 		strcpy(node->personal.pekerjaan,tempbio.pekerjaan);
-		
+
 		node->zktprof.statprof = 0;
 		node->zktprof.income = 0;
     	node->zktprof.tunggakan = 0;
@@ -430,7 +435,7 @@ void simpanbio(int id, biodata tempbio, list *L){
 		node->zktemas.perak = 0;
 		node->zktemas.bzktper = 0;
 		node->zktemas.uangper = 0;
-		
+
 		node -> next = L->awal;
 		L->awal = node;
 		node = NULL;
@@ -443,7 +448,7 @@ void simpanbio(int id, biodata tempbio, list *L){
 		strcpy(node->personal.kec,tempbio.kec);
 		node->personal.jk = tempbio.jk;
 		strcpy(node->personal.pekerjaan,tempbio.pekerjaan);
-		
+
 		node->zktprof.statprof = 0;
 		node->zktprof.income = 0;
     	node->zktprof.tunggakan = 0;
@@ -459,7 +464,7 @@ void simpanbio(int id, biodata tempbio, list *L){
 		node->zktemas.perak = 0;
 		node->zktemas.bzktper = 0;
 		node->zktemas.uangper = 0;
-		
+
 		node -> next = NULL;
 
 		elemen *buntut = L->awal;
@@ -473,30 +478,30 @@ void simpanbio(int id, biodata tempbio, list *L){
 
 };
 
-void cari(list L, int arr_id[15], int menu_sub){
+void cari(list L, int arr_id[15],char menu_sub){
 	if(L.awal != NULL){
-		
+
 		char inpt[31],band[31];
 		int ketemu = 1,lkw,ctr=0,cat,j;
-		
-		if(menu_sub == 1){
+
+		if(menu_sub == '1'){
 			j=16;
-		}else if(menu_sub == 3){
+		}else if(menu_sub == '3'){
 			j=22;
-		}else if(menu_sub == 4){
+		}else if(menu_sub == '4'){
 			j=16;
-		}else if(menu_sub == 5){
+		}else if(menu_sub == '5'){
 			j = 15;
 		}
-		
+
 		cat = kat();
-		
+
 		cout << " \n Masukan kata kunci pencarian : ";
 		fflush(stdin);cin.get(inpt,30);
-		
+
 		lkw = strlen(inpt);
 		elemen *bantu = L.awal;
-			
+
         cout <<"\n +------+---------------------------+-------+----------------------+----------------------+----+-------------------+" << endl;
         cout <<" | ID   | Nama                      | RT/RW | Kampung              | Kecamatan            | JK | Pekerjaan         |" << endl;
         cout <<" +------+---------------------------+-------+----------------------+----------------------+----+-------------------+" << endl;
@@ -510,7 +515,7 @@ void cari(list L, int arr_id[15], int menu_sub){
 				}else if(cat == 4){
 					strcpy(band,bantu->personal.pekerjaan);
 				}
-               
+
 			if(strnicmp(band,inpt,lkw) == 0){
 				arr_id[ctr] = bantu->id;
 				/*cout <<"Id\t\t\t: "<< bantu->id<<endl;
@@ -535,9 +540,9 @@ void cari(list L, int arr_id[15], int menu_sub){
 				bantu = bantu->next;
 				j = j+1;
 				ctr = ctr + 1;
-				
-				
-				
+
+
+
 			}else{
 				bantu = bantu->next;
 			}
@@ -546,10 +551,11 @@ void cari(list L, int arr_id[15], int menu_sub){
         cout << endl;
 		if((bantu == NULL)&&(ketemu == 1)){
 			cout << " Data tidak ditemukan.. "<<endl;
+			arr_id[0]=0;
 		}
 
 	}else{
-		cout<<" List Masih Kososng.. ";
+		cout<<" Belum ada data, data masih kosong.. ";
 	}
 
 
@@ -558,8 +564,8 @@ void cari(list L, int arr_id[15], int menu_sub){
 void ubahdatalist(list *L,int arr_id[15]){
 	int pil,id,ctr,ketemu = 1;
 	char konf;
-	
-		
+
+
 	do{
 	  cout << endl;
 	  cout << " Masukan ID pendaftar yang datanya akan di ubah: ";
@@ -572,7 +578,7 @@ void ubahdatalist(list *L,int arr_id[15]){
 		  ctr = ctr + 1;
 	  }
 	  if(ketemu == 1){
-	  	cout << " Id yang anda masukan tidak terdaftar";
+	  	cout << " ID yang Anda masukan tidak terdaftar";
 	  }
 	}while(ketemu!=0);
 
@@ -679,7 +685,7 @@ void tampilall(list L){
         cout <<"\n +------+---------------------------+-------+----------------------+----------------------+----+-------------------+" << endl;
         cout << endl;
 	}else{
-		cout<<"List Masih Kososng"<<endl;
+		cout<<" Belum ada data, data masih kosong.. "<<endl;
 	}
 
 
@@ -689,13 +695,13 @@ void tampilall(list L){
 
 void svall(list L){
 	if(L.awal != NULL){
-		
+
 		time_t sekarang = time(0);
 		char nama[30];
 		char txt[5] = {'.','t','x','t'};
 		char namafile[35];
 		char* waktu = ctime(&sekarang);
-		
+
 		cout <<" File akan disimpan di tempat file program berada."<<endl;
 		cout <<" Jika ingin menyimpan dilokasi lain masukan nama file dan lokasinya"<<endl;
 		cout <<" Contoh : D:\\namafile"<<endl;
@@ -705,25 +711,25 @@ void svall(list L){
 		strcpy(namafile, strcat(nama, txt));
 		ofstream byrfile;
   		byrfile.open (namafile);
-  		byrfile <<"=============================================================="<<endl;
-  		byrfile <<"                Biodata Pembayar Zakat"<<endl;
-  		byrfile <<"=============================================================="<<endl;
+  		byrfile <<" =============================================================="<<endl;
+  		byrfile <<"                 Biodata Pembayar Zakat"<<endl;
+  		byrfile <<" =============================================================="<<endl;
   		byrfile <<endl;
   		byrfile << " File ini di simpan pada : "<<waktu<<endl;
-  		
+
   		if(byrfile.is_open()){
   			elemen *bantu = L.awal;
 			while(bantu != NULL){
-				byrfile <<"=============================================================="<<endl;
+				byrfile <<" =============================================================="<<endl;
 				byrfile <<" ID\t\t			: "<< bantu->id<<endl;
-				byrfile <<"--------------------------------------------------------------"<<endl;
+				byrfile <<" --------------------------------------------------------------"<<endl;
 				byrfile <<" Nama\t\t		: "<<  bantu->personal.nama <<endl;
 				byrfile <<" RT/RW\t\t		: "<<bantu->personal.rt <<"/"<<bantu->personal.rw << endl;
 				byrfile <<" Kampung\t\t	: "<<bantu->personal.kampung<<endl;
 				byrfile <<" Kecamatan\t		: "<<bantu->personal.kec<<endl;
 				byrfile <<" Jenis Kelamin\t	: "<<bantu->personal.jk<<endl;
 				byrfile <<" Pekerjaan\t		: "<<bantu->personal.pekerjaan<<endl;
-				byrfile <<"=============================================================="<<endl;
+				byrfile <<" =============================================================="<<endl;
 				byrfile <<endl;
 				bantu = bantu->next;
 			};
@@ -749,15 +755,15 @@ void kondisi_zakat(int id_pem,int arr_cnd[5], list L){
 		bantu = bantu->next;
 	}
 		arr_cnd[1] = bantu->bayar;
-		arr_cnd[2] = bantu->zktprof.statprof; 
+		arr_cnd[2] = bantu->zktprof.statprof;
 		arr_cnd[3] = bantu->zktemas.statmas;
 		arr_cnd[4] = bantu->zktemas.statper;
-		
+
 };
 
 
 
-void simpanzkt(int pil_zkt, int id_pem, zakatemas tempmas,zakatprof tempprof, list *L){
+void simpanzkt(char pil_zkt, int id_pem, zakatemas tempmas,zakatprof tempprof, list *L){
 
 	elemen *bantu = L->awal;
 	while(bantu->id != id_pem){
@@ -826,7 +832,7 @@ void input_value_table_zakat(int id_pem,int statprof,int income,int tunggakan,fl
 
 void caribay(list L,int arr_id[15]){
 	if(L.awal != NULL){
-		
+
 		char inpt[31],band[31];
 		int ketemu = 1,lkw,j,ctr=0,cat;
 		j = 19;
@@ -837,7 +843,7 @@ void caribay(list L,int arr_id[15]){
 		lkw = strlen(inpt);
 		elemen *bantu = L.awal;
 		while(bantu != NULL){
-			
+
 			if(cat == 1){
 					strcpy(band,bantu->personal.nama);
 				}else if(cat == 2){
@@ -847,7 +853,7 @@ void caribay(list L,int arr_id[15]){
 				}else if(cat == 4){
 					strcpy(band,bantu->personal.pekerjaan);
 				}
-			
+
 		if((strnicmp(band,inpt,lkw) == 0)&&(ketemu==1)){
             cout << "\n\n +-----+-----------------------+----------------------+---------------------------+--------------------+--------------------+" << endl;
             cout << " |     |                       |                      | Zakat Penghasilan (Rp)    | Zakat Emas         | Zakat Perak        |" << endl;
@@ -856,28 +862,28 @@ void caribay(list L,int arr_id[15]){
             cout << " +-----+-----------------------+----------------------+-------------+-------------+------+-------------+------+-------------+" << endl;
 		}
 			if(strnicmp(band,inpt,lkw) == 0){
-				
+
 				arr_id[ctr] = bantu->id;
-				
+
                 gotoxy(1,j); cout <<"| " << bantu->id;
                 gotoxy(7,j); cout <<"| " << bantu->personal.nama;
                 gotoxy(31,j); cout <<"| " << bantu->personal.pekerjaan;
-	
+
 				if((bantu->zktprof.statprof == 1) || (bantu->zktprof.statprof == 0)){
                         gotoxy(54,j); cout <<"| " << bantu->zktprof.income;
                         gotoxy(68,j); cout <<"| " << bantu->zktprof.zakat;
-					
+
 				}
 				if((bantu->zktemas.statmas == 1) || (bantu->zktemas.statmas == 0)){
                         gotoxy(82,j); cout <<"| " << bantu->zktemas.bzktmas;
                         gotoxy(89,j); cout <<"| " << bantu->zktemas.uangmas;
-					
+
 				}
 				if((bantu->zktemas.statper == 0) || (bantu->zktemas.statper == 1)){
                         gotoxy(103,j); cout <<"| " << bantu->zktemas.bzktper;
                         gotoxy(110,j); cout <<"| " << bantu->zktemas.uangper;
                         gotoxy(124,j); cout <<"|";
-					
+
 				}
 				cout <<endl;
 				ketemu = 0;
@@ -894,38 +900,38 @@ void caribay(list L,int arr_id[15]){
             cout << " +-----+-----------------------+----------------------+-------------+-------------+------+-------------+------+-------------+\n" << endl;
 		}
 		if((bantu == NULL)&&(ketemu == 1)){
-			cout << "Data tidak ditemukan.. "<<endl;
+			cout << " Data tidak ditemukan.. "<<endl;
 		}
 		bantu = NULL;
 	}else{
-		cout<<" List Masih Kososng"<<endl;
+		cout<<" Belum ada data, data masih kosong.."<<endl;
 	}
 
 
 };
 
 
-void caripembayar(list L,int arr_id[15],int menu_sub){
+void caripembayar(list L,int arr_id[15],char menu_sub){
 	if(L.awal != NULL){
-		
+
 	char inpt[31],band[31];
 		int ketemu = 1,lkw,j,ctr=0,cat;
-		
+
 	arr_id[ctr] = 0;
-		
-		if(menu_sub == 3){
+
+		if(menu_sub == '3'){
 			j = 18;
-		}else if(menu_sub == 4){
+		}else if(menu_sub == '4'){
 			j = 19;
 		}
 		cat = kat();
-		
+
 		cout << "\n Masukan kata kunci pencarian : ";
 		fflush(stdin);cin.get(inpt,30);
 		lkw = strlen(inpt);
 		elemen *bantu = L.awal;
 		while(bantu != NULL){
-			
+
 			if(cat == 1){
 					strcpy(band,bantu->personal.nama);
 				}else if(cat == 2){
@@ -935,7 +941,7 @@ void caripembayar(list L,int arr_id[15],int menu_sub){
 				}else if(cat == 4){
 					strcpy(band,bantu->personal.pekerjaan);
 				}
-			
+
 		if((strnicmp(band,inpt,lkw) == 0)&&(ketemu==1)){
             cout << "\n\n +-----+-----------------------+----------------------+---------------------------+--------------------+--------------------+" << endl;
             cout << " |     |                       |                      | Zakat Penghasilan (Rp)    | Zakat Emas         | Zakat Perak        |" << endl;
@@ -943,11 +949,11 @@ void caripembayar(list L,int arr_id[15],int menu_sub){
             cout << " |     |                       |                      | Penghasilan | Zakat       | gr   | Rp          | gr   | Rp          |" << endl;
             cout << " +-----+-----------------------+----------------------+-------------+-------------+------+-------------+------+-------------+" << endl;
 		}
-			
+
 			if((strnicmp(band,inpt,lkw) == 0)&&(bantu->bayar==1)){
-				
+
 				arr_id[ctr] = bantu->id;
-				
+
                 gotoxy(1,j); cout <<"| " << bantu->id;
                 gotoxy(7,j); cout <<"| " << bantu->personal.nama;
                 gotoxy(31,j); cout <<"| " << bantu->personal.pekerjaan;
@@ -1016,11 +1022,11 @@ void caripembayar(list L,int arr_id[15],int menu_sub){
             cout << " +-----+-----------------------+----------------------+-------------+-------------+------+-------------+------+-------------+\n" << endl;
 		}
 		if((bantu == NULL)&&(ketemu == 1)){
-			cout << "Data tidak ditemukan.. "<<endl;
+			cout << " Data tidak ditemukan.. "<<endl;
 		}
 		bantu = NULL;
 	}else{
-		cout<<" List Masih Kososng"<<endl;
+		cout<<" Belum ada data, data masih kosong.. "<<endl;
 	}
 
 
@@ -1103,7 +1109,7 @@ void tampilpembayar(list L){
 		cout << " +-----+-----------------------+----------------------+-------------+-------------+------+-------------+------+-------------+" << endl;
 		bantu = NULL;
 	}else{
-		cout<<"List Masih Kososng! ";
+		cout<<" Belum ada data, data masih kosong.. ";
 	}
 
 
@@ -1123,7 +1129,7 @@ void tampil_aml_zkt(list L){
         cout << " |     |                       |                      | Penghasilan | Zakat       | gr   | Rp          | gr   | Rp          |" << endl;
         cout << " +-----+-----------------------+----------------------+-------------+-------------+------+-------------+------+-------------+" << endl;
 		while(bantu != NULL){
-			
+
 
 			//if(bantu->bayar == 1){
                 /*
@@ -1190,7 +1196,7 @@ void tampil_aml_zkt(list L){
 		cout << " +-----+-----------------------+----------------------+-------------+-------------+------+-------------+------+-------------+" << endl;
 		bantu = NULL;
 	}else{
-		cout<<"List Masih Kososng! ";
+		cout<<" Belum ada data, data masih kosong.. ";
 	}
 
 
@@ -1209,7 +1215,7 @@ void cari_pemb_aml(list L,int arr_id[15]){
 		lkw = strlen(inpt);
 		elemen *bantu = L.awal;
 		while(bantu != NULL){
-			
+
 			if(cat == 1){
 					strcpy(band,bantu->personal.nama);
 				}else if(cat == 2){
@@ -1219,17 +1225,17 @@ void cari_pemb_aml(list L,int arr_id[15]){
 				}else if(cat == 4){
 					strcpy(band,bantu->personal.pekerjaan);
 				}
-	
-	
-		
+
+
+
 			if(strnicmp(bantu->personal.nama,inpt,lkw) == 0){
-				
+
 				arr_id[ctr] = bantu->id;
-				
+
                 	cout <<endl;
-				cout <<"=============================================================="<<endl;
+				cout <<" =============================================================="<<endl;
 				cout <<" ID				: "<<bantu->id<<endl;
-				cout <<"--------------------------------------------------------------"<<endl;
+				cout <<" --------------------------------------------------------------"<<endl;
 				cout <<" Nama				: "<<bantu->personal.nama <<endl;
 				cout <<" RT/RW				: "<<bantu->personal.rt <<"/"<<bantu->personal.rw << endl;
 				cout <<" Kampung			: "<<bantu->personal.kampung<<endl;
@@ -1265,22 +1271,22 @@ void cari_pemb_aml(list L,int arr_id[15]){
 					cout << " --------------------------------------------------------" << endl;
 					cout << endl;
 				}
-				
-				cout <<"=============================================================="<<endl;
+
+				cout <<" =============================================================="<<endl;
 				cout <<endl;
 				ketemu = 0;
 				bantu = bantu->next;
-				
+
 				ctr = ctr + 1;
 			}else{
 				bantu = bantu->next;
-				
+
 			}
 
 		};
-	
+
 		if((bantu == NULL)&&(ketemu == 1)){
-			cout << "\n Yang bernama \"" << inpt <<"\" tidak ditemukan"<<endl;
+			cout << "\n Data tidak ditemukan..."<<endl;
 		}
 		bantu = NULL;
 	}else{
@@ -1305,22 +1311,22 @@ void svallbayar(list L){
 		cout <<" Nama file : ";
 		fflush(stdin);cin.get(nama,30);
 		strcpy(namafile, strcat(nama, txt));
-		
+
 		ofstream byrfile;
   		byrfile.open (namafile);
-  		byrfile <<"=============================================================="<<endl;
-  		byrfile <<"               Data Zakat Yang di Bayar"<<endl;
-  		byrfile <<"=============================================================="<<endl;
+  		byrfile <<" =============================================================="<<endl;
+  		byrfile <<"                Data Zakat Yang di Bayar"<<endl;
+  		byrfile <<" =============================================================="<<endl;
   		byrfile <<endl;
-  		byrfile << "File ini di simpan pada : "<<waktu<<endl;
+  		byrfile << " File ini di simpan pada : "<<waktu<<endl;
   		elemen *bantu = L.awal;
   		if(byrfile.is_open()){
 
 			while(bantu != NULL){
 				byrfile <<endl;
-				byrfile <<"=============================================================="<<endl;
+				byrfile <<" =============================================================="<<endl;
 				byrfile <<" ID\t\t\t 		: "<<bantu->id<<endl;
-				byrfile <<"--------------------------------------------------------------"<<endl;
+				byrfile <<" --------------------------------------------------------------"<<endl;
 				byrfile <<" Nama\t\t		: "<<bantu->personal.nama <<endl;
 				byrfile <<" RT/RW\t\t		: "<<bantu->personal.rt <<"/"<<bantu->personal.rw << endl;
 				byrfile <<" Kampung\t\t    : "<<bantu->personal.kampung<<endl;
@@ -1356,8 +1362,8 @@ void svallbayar(list L){
 					byrfile << " --------------------------------------------------------" << endl;
 					byrfile << endl;
 				}
-				
-				byrfile <<"=============================================================="<<endl;
+
+				byrfile <<" =============================================================="<<endl;
 
 				byrfile <<endl;
 				bantu = bantu->next;
@@ -1438,8 +1444,8 @@ void hapussemua(list *L){
 
 int main(int argc, char** argv) {
  	ukuranwindow(126,200);
-	int menu,menu_sub,menu_konf,pil_zkt,id,id_pem,ctr,ketemu,jmp=0;
-	char pil_bay,pilih;
+	int id,id_pem,ctr,ketemu,jmp=0;
+	char pil_bay,pilih, menu, menu_sub, menu_konf, pil_zkt;
 	list L;
 	buatlist(&L);
 	// ----- tempat menyimpan data sementara ----------//
@@ -1447,7 +1453,7 @@ int main(int argc, char** argv) {
 		biodata tempbio;
 		zakatemas tempmas;
 		zakatprof tempprof;
-		
+
 	// --------------- Pre-Inputed Data ------------//
 		simpdata(1,"Insan Muslim",2,5,"Cidulang","Gegerbitung",'L',"Karyawan",&L);
 		simpdata(2,"Nadiar A Syariful",3,2,"Cisitu","Cisitu",'L',"Wiraswasta",&L);
@@ -1483,10 +1489,10 @@ int main(int argc, char** argv) {
 		cout << " Masukan Pilihan : ";
 		cin >> menu;
 		switch(menu){
-			
+
 //  -----------------------  Pendaftaran Zakat --------------------------   //
 
-			case 1 :
+			case '1' :
 				do{
 					system("cls");
 					cout << "\n -----------------------------------" << endl;
@@ -1502,8 +1508,8 @@ int main(int argc, char** argv) {
 					cout << " Masukan Pilihan : ";
 					cin >> menu_sub;
 					switch(menu_sub){
-						case 1:
-							system("cls");
+						case '1':
+						    system("cls");
 							cout << "\n -----------------------------------" << endl;
 							cout << " Menu > Pendaftaran > Cari" << endl;
 							cout << " -----------------------------------" << endl;
@@ -1512,7 +1518,7 @@ int main(int argc, char** argv) {
 							cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 							getch();
 							break;
-						case 2:
+						case '2':
 							system("cls");
 							cout << "\n -----------------------------------" << endl;
 							cout << " Menu > Pendaftaran > Input" << endl;
@@ -1534,10 +1540,10 @@ int main(int argc, char** argv) {
 								cout << " Pilih : ";
 								cin >> menu_konf;
 								switch(menu_konf){
-									case 1 :
+									case '1' :
 										simpanbio(id,tempbio,&L);
 										break;
-									case 2 :
+									case '2' :
 										tempubahdaf(&tempbio);
 										break;
 									default :
@@ -1545,12 +1551,12 @@ int main(int argc, char** argv) {
 										cout << " Tekan tombol sembarang untuk memilih kembali.. ";
 										break;
 								}
-							}while(menu_konf!=1);
+							}while(menu_konf!='1');
 							cout << " -----------------------------------" << endl;
 							cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 							getch();
 							break;
-						case 3:
+						case '3':
 							do{
 								system("cls");
 								cout << "\n -----------------------------------" << endl;
@@ -1564,27 +1570,27 @@ int main(int argc, char** argv) {
 								cin >> menu_konf;
 								cout << endl;
 								switch(menu_konf){
-									case 1 :
+									case '1' :
 
 										tampilall(L);
 										cout << "\n Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 										getch();
 										break;
-									case 2 :
+									case '2' :
 										cari(L,arr_id,menu_sub);
 										cout << "\n Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 										getch();
 										break;
-									case 3 :
+									case '3' :
 										break;
 									default :
 										cout << " Pilihan tidak ada! Mohon periksa"<<endl;
 										cout << " Tekan tombol sembarang untuk memilih kembali.. ";
 										break;
 								}
-							}while(menu_konf!=3);
+							}while(menu_konf!='3');
 							break;
-						case 4:
+						case '4':
 							system("cls");
 							cout << "\n -----------------------------------" << endl;
 							cout << "  Menu > Pendaftaran > Ubah" << endl;
@@ -1596,37 +1602,37 @@ int main(int argc, char** argv) {
 							cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 							getch();
 							break;
-						case 5:
+						case '5':
 							system("cls");
 							cout << "\n -----------------------------------" << endl;
 							cout << " Menu > Pendaftaran > Simpan" << endl;
 							cout << " -----------------------------------" << endl;
-							
+
 							svall(L);
-							
+
 							cout << "\n\n Data berhasil disimpan"<<endl;
 							cout << " -----------------------------------" << endl;
 							cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 							getch();
 							break;
-						case 6:
+						case '6':
 							break;
 						default:
 							cout << " Pilihan yang anda masukan tidak terdaftar"<<endl;
-							cout << " Tekan tombol sembarang untuk kembali ke menu awal.. ";
+							cout << " Tekan tombol sembarang untuk mengulang.. ";
 							getch();
 							break;
 					}
 
-				}while(menu_sub!=6);
+				}while(menu_sub!='6');
 				break;
-		
-//  -----------------------  Bayar Zakat --------------------------   //	
-	
-			case 2 :
+
+//  -----------------------  Bayar Zakat --------------------------   //
+
+			case '2' :
 				do{
-					
-					
+
+
 
 					system("cls");
 					cout << "\n -----------------------------------" << endl;
@@ -1642,7 +1648,7 @@ int main(int argc, char** argv) {
 					cout << " Masukan Pilihan: ";
 					cin >> menu_sub;
 					switch(menu_sub){
-						case 1:
+						case '1':
 
 								system("cls");
 								cout << "\n -----------------------------------" << endl;
@@ -1670,7 +1676,7 @@ int main(int argc, char** argv) {
 								}while(ketemu!=0);
 								cout << " -----------------------------------" << endl;
 								kondisi_zakat(id_pem,arr_cnd,L);
-								
+
 									if((arr_cnd[1]==1)&&(arr_cnd[2]==1)&&(arr_cnd[3]==1)&&(arr_cnd[4]==1)){
 										cout << endl;
 										cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar semua zakat yang ada."<<endl;
@@ -1690,9 +1696,9 @@ int main(int argc, char** argv) {
 													cout << " Masukan pilihan anda : ";
 													cin >> pil_zkt;
 													cout << endl;
-				
+
 														switch(pil_zkt){
-														case 1:
+														case '1':
 															if(arr_cnd[2] == 1){
 																cout << endl;
 																cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat profesi."<<endl;
@@ -1704,15 +1710,15 @@ int main(int argc, char** argv) {
 																tempoutprof(tempprof);
 																jmp = 0;
 															}
-															
+
 															break;
-														case 2:
+														case '2':
 															if((arr_cnd[3]==1)&&(arr_cnd[4]==1)){
 																cout << endl;
 																cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat emas dan perak."<<endl;
 																cout << " Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
 																jmp = 1;
-																
+
 															}else{
 																tempmas = resetmas();
 																tempmas = hitmas();
@@ -1730,9 +1736,9 @@ int main(int argc, char** argv) {
 																	tempoutmas(tempmas);
 																	jmp = 0;
 																}
-						
+
 															}
-															
+
 															break;
 														default:
 															cout << " Pilihan tidak ada!!" << endl;
@@ -1740,8 +1746,8 @@ int main(int argc, char** argv) {
 															getch();
 															break;
 														}
-													}while((pil_zkt!=1)&&(pil_zkt!=2));
-														cout << " -----------------------------------" << endl;	
+													}while((pil_zkt!='1')&&(pil_zkt!='2'));
+														cout << " -----------------------------------" << endl;
 														cout << " [1] Untuk Selesai " << "[2] Untuk Ulangi"<<endl;
 														cout << " Pilih : ";
 														cin >> pil_bay;
@@ -1750,19 +1756,19 @@ int main(int argc, char** argv) {
 														simpanzkt(pil_zkt,id_pem, tempmas, tempprof, &L);
 													}
 									}
-									
+
 								}else{
 									cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 									getch();
 								}
 
 							break;
-						case 2:
+						case '2':
 							tampilpembayar(L);
 							cout << "\n\n Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 							getch();
 							break;
-						case 3:
+						case '3':
 							system("cls");
 							cout << "-----------------------------------" << endl;
 							cout << " Menu > Pembayaran > Cari" << endl;
@@ -1771,7 +1777,7 @@ int main(int argc, char** argv) {
 							cout << "\n Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 							getch();
 							break;
-						case 4:
+						case '4':
 								system("cls");
 								cout << "\n -----------------------------------" << endl;
 								cout << " Menu > Pembayaran > Ubah" << endl;
@@ -1808,13 +1814,13 @@ int main(int argc, char** argv) {
 									cout << endl;
 
 										switch(pil_zkt){
-										case 1:
+										case '1':
 											tempprof = resetprof();
 											tempprof = hitprof();
 											tempoutprof(tempprof);
 
 											break;
-										case 2:
+										case '2':
 											tempmas = resetmas();
 											tempmas = hitmas();
 											tempoutmas(tempmas);
@@ -1825,22 +1831,22 @@ int main(int argc, char** argv) {
 											getch();
 											break;
 										}
-									}while((pil_zkt!=1)&&(pil_zkt!=2));
-									cout << " -----------------------------------" << endl;	
+									}while((pil_zkt!='1')&&(pil_zkt!='2'));
+									cout << " -----------------------------------" << endl;
 									cout << " Apakah data yang anda masukan sudah benar? "<<endl;
 									cout << " [1] Ya\t" << "[2] Ulangi"<<endl;
 									cout << " Pilih : ";
 									cin >> pil_bay;
-									
+
 									simpanzkt(pil_zkt,id_pem, tempmas, tempprof, &L);
-									
+
 								}while(pil_bay!='1');
 							}else{
 								cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 								getch();
 								}
 							break;
-						case 5:
+						case '5':
 						system("cls");
 							cout << "\n -----------------------------------" << endl;
 							cout << " Menu > Pendaftaran > Simpan" << endl;
@@ -1852,7 +1858,7 @@ int main(int argc, char** argv) {
 							cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 							getch();
 							break;
-						case 6:
+						case '6':
 							break;
 						default:
 							cout << " Pilihan yang anda masukan tidak terdaftar"<<endl;
@@ -1861,11 +1867,11 @@ int main(int argc, char** argv) {
 							break;
 					}
 
-				}while(menu_sub!=6);
+				}while(menu_sub!='6');
 				break;
-				
+
 //  -----------------------  Amil Zakat --------------------------   //
-			case 3 :
+			case '3' :
 				do{
 				system("cls");
 					cout << "\n -----------------------------------" << endl;
@@ -1881,7 +1887,7 @@ int main(int argc, char** argv) {
 					cout << " Masukan Pilihan: ";
 					cin >> menu_sub;
 					switch(menu_sub){
-						case 1:
+						case '1':
 							system("cls");
 							cout << "-----------------------------------" << endl;
 							cout << " Menu > Amil Zakat > Input" << endl;
@@ -1914,10 +1920,10 @@ int main(int argc, char** argv) {
 									cout << " Pilih : ";
 									cin >> menu_konf;
 									switch(menu_konf){
-										case 1 :
+										case '1' :
 											simpanbio(id,tempbio,&L);
 											break;
-										case 2 :
+										case '2' :
 											tempubahdaf(&tempbio);
 											break;
 										default :
@@ -1925,13 +1931,13 @@ int main(int argc, char** argv) {
 											cout << " Tekan tombol sembarang untuk memilih kembali.. ";
 											break;
 										}
-									}while(menu_konf!=1);
+									}while(menu_konf!='1');
 									cout << " -----------------------------------" << endl;
 									cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 									getch();
 									break;
 								}else if(pilih == '2'){
-								
+
 									system("cls");
 									cout << "\n -----------------------------------" << endl;
 									cout << " Menu > Amil Zakat > Input > Zakat" << endl;
@@ -1941,7 +1947,7 @@ int main(int argc, char** argv) {
 										do{
                                 		   ketemu = 1;
 	                             	   	   cout << endl;
-	                            	       cout << "Masukan ID pendaftar yang akan membayar zakat: ";
+	                            	       cout << " Masukan ID pendaftar yang akan membayar zakat: ";
 	                            	       cin >> id_pem;
 	                               		   ctr=0;
 	                                  	 while(arr_id[ctr] != 0){
@@ -1951,15 +1957,15 @@ int main(int argc, char** argv) {
 		                                  ctr = ctr + 1;
 	  									}
 	  									if(ketemu == 1){
-	  									cout << "Id yang anda masukan tidak terdaftar";
+	  									cout << " ID yang anda masukan tidak terdaftar";
 	  									}
 								}while(ketemu!=0);
 								cout << " -----------------------------------" << endl;
 								kondisi_zakat(id_pem,arr_cnd,L);
-								
+
 									if((arr_cnd[1]==1)&&(arr_cnd[2]==1)&&(arr_cnd[3]==1)&&(arr_cnd[4]==1)){
-										cout << "Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar semua zakat yang ada."<<endl;
-										cout << "Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
+										cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar semua zakat yang ada."<<endl;
+										cout << " Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
 										cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 										getch();
 									}else{
@@ -1975,12 +1981,12 @@ int main(int argc, char** argv) {
 													cout << " Masukan pilihan anda : ";
 													cin >> pil_zkt;
 													cout << endl;
-				
+
 														switch(pil_zkt){
-														case 1:
+														case '1':
 															if(arr_cnd[2] == 1){
-																cout << "Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat profesi."<<endl;
-																cout << "Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
+																cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat profesi."<<endl;
+																cout << " Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
 																jmp = 1;
 															}else{
 																tempprof = resetprof();
@@ -1988,32 +1994,32 @@ int main(int argc, char** argv) {
 																tempoutprof(tempprof);
 																jmp = 0;
 															}
-															
+
 															break;
-														case 2:
+														case '2':
 															if((arr_cnd[3]==1)&&(arr_cnd[4]==1)){
-																cout << "Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat emas dan perak."<<endl;
-																cout << "Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
+																cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat emas dan perak."<<endl;
+																cout << " Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
 																jmp = 1;
-																
+
 															}else{
 																tempmas = resetmas();
 																tempmas = hitmas();
 																if((arr_cnd[3]==1)&&(tempmas.pil == 1)){
-																	cout << "Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat emas."<<endl;
-																	cout << "Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
+																	cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat emas."<<endl;
+																	cout << " Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
 																	jmp = 1;
 																}else if((arr_cnd[4]==1)&&(tempmas.pil == 2)){
-																	cout << "Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat perak."<<endl;
-																	cout << "Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
+																	cout << " Pembayar zakat dengan ID " << id_pem <<" pada periode ini telah membayar zakat perak."<<endl;
+																	cout << " Gunakan menu \"Ubah\" untuk mengubah data"<<endl;
 																	jmp = 1;
 																}else {
 																	tempoutmas(tempmas);
 																	jmp = 0;
 																}
-						
+
 															}
-															
+
 															break;
 														default:
 															cout << " Pilihan tidak ada!!" << endl;
@@ -2021,8 +2027,8 @@ int main(int argc, char** argv) {
 															getch();
 															break;
 														}
-													}while((pil_zkt!=1)&&(pil_zkt!=2));
-														cout << " -----------------------------------" << endl;	
+													}while((pil_zkt!='1')&&(pil_zkt!='2'));
+														cout << " -----------------------------------" << endl;
 														cout << " [1] Untuk Selesai " << "[2] Untuk Ulangi"<<endl;
 														cout << " Pilih : ";
 														cin >> pil_bay;
@@ -2031,25 +2037,24 @@ int main(int argc, char** argv) {
 														simpanzkt(pil_zkt,id_pem, tempmas, tempprof, &L);
 													}
 									}
-									
+
 								}else{
 									cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya.. ";
 									getch();
 								}
 
-								
+
 							}
-						
 							break;
-						case 2:
+						case '2':
 							system("cls");
-							cout << "-----------------------------------" << endl;
+							cout << " -----------------------------------" << endl;
 							cout << " Menu > Amil Zakat > Output zakat" << endl;
-							cout << "-----------------------------------" << endl;
+							cout << " -----------------------------------" << endl;
 							cout << " [1] Biodata "<<endl;
 							cout << " [2] Zakat"<<endl;
 							cout << " [3] Keluar"<<endl;
-							cout << "-----------------------------------" << endl;
+							cout << " -----------------------------------" << endl;
 							cout << " Masukan pilihan : ";
 							cin >> pilih;
 							if(pilih == '1'){
@@ -2062,50 +2067,49 @@ int main(int argc, char** argv) {
 								getch();
 							}
 							break;
-						case 3:
+						case '3':
 							system("cls");
-							cout << "---------------------------------------" << endl;
+							cout << " ---------------------------------------" << endl;
 							cout << " Menu > Amil Zakat > Cari" << endl;
-							cout << "---------------------------------------" << endl;
+							cout << " ---------------------------------------" << endl;
 							cout << " [1] Biodata "<<endl;
 							cout << " [2] Zakat"<<endl;
 							cout << " [3] Keluar"<<endl;
-							cout << "-----------------------------------" << endl;
+							cout << " -----------------------------------" << endl;
 							cout << " Masukan pilihan : ";
 							cin >> pilih;
 							cout << endl;
 							if(pilih == '1'){
 								system("cls");
-								cout << "---------------------------------------" << endl;
+								cout << " ---------------------------------------" << endl;
 								cout << " Menu > Amil Zakat > Cari > Biodata" << endl;
-								cout << "---------------------------------------" << endl;
-								menu_sub = 5;
+								cout << " ---------------------------------------" << endl;
+								menu_sub = '5';
                                 cari(L,arr_id,menu_sub);
-                                menu_sub = 3;
+                                menu_sub = '3';
 							}else if(pilih == '2'){
 								system("cls");
-								cout << "---------------------------------------" << endl;
+								cout << " ---------------------------------------" << endl;
 								cout << " Menu > Amil Zakat > Cari > Zakat" << endl;
-								cout << "---------------------------------------" << endl;
+								cout << " ---------------------------------------" << endl;
 							    caripembayar(L,arr_id,menu_sub);
-							  
-							}
 
-							cout << "-----------------------------------" << endl;
-							cout << "Tekan tombol sembarang untuk kembali ke menu sebelumnya"<<endl;
+							}
+							cout << " -----------------------------------" << endl;
+							cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya"<<endl;
 							getch();
 							break;
-						case 4:
+						case '4':
 								system("cls");
-								cout << "-----------------------------------" << endl;
+								cout << " -----------------------------------" << endl;
 								cout << " Menu > Amil Zakat > Ubah" << endl;
-								cout << "-----------------------------------" << endl;
+								cout << " -----------------------------------" << endl;
 								cari_pemb_aml(L,arr_id);
 								if(arr_id[0]!=0){
 								cout << " [1] Biodata "<<endl;
 								cout << " [2] Zakat"<<endl;
 								cout << " [3] Keluar"<<endl;
-								cout << "-----------------------------------" << endl;
+								cout << " -----------------------------------" << endl;
 								cout << " Masukan pilihan : ";
                                 cin >> pilih;
                                 if(pilih == '1'){
@@ -2114,7 +2118,7 @@ int main(int argc, char** argv) {
                                 	do{
                                 	   	ketemu = 1;
 	                                   	cout << endl;
-	                                   	cout << "Masukan ID pendaftar yang datanya akan di ubah: ";
+	                                   	cout << " Masukan ID pendaftar yang datanya akan di ubah: ";
 	                                   	cin >> id_pem;
 	                                   	ctr=0;
 	  									while(arr_id[ctr] != 0){
@@ -2124,7 +2128,7 @@ int main(int argc, char** argv) {
 		  									ctr = ctr + 1;
 	  									}
 	 									if(ketemu == 1){
-	  										cout << "Id yang anda masukan tidak terdaftar";
+	  										cout << " ID yang Anda masukan tidak terdaftar";
 	  									}
 									}while(ketemu!=0);
 								cout << "-----------------------------------" << endl;
@@ -2140,13 +2144,13 @@ int main(int argc, char** argv) {
 									cout << endl;
 
 										switch(pil_zkt){
-										case 1:
+										case '1':
 											tempprof = resetprof();
 											tempprof = hitprof();
 											tempoutprof(tempprof);
 
 											break;
-										case 2:
+										case '2':
 											tempmas = resetmas();
 											tempmas = hitmas();
 											tempoutmas(tempmas);
@@ -2157,49 +2161,46 @@ int main(int argc, char** argv) {
 											getch();
 											break;
 										}
-									}while((pil_zkt!=1)&&(pil_zkt!=2));
-									cout << " -----------------------------------" << endl;	
+									}while((pil_zkt!='1')&&(pil_zkt!='2'));
+									cout << " -----------------------------------" << endl;
 									cout << " Apakah data yang anda masukan sudah benar? "<<endl;
 									cout << " [1] Ya\t" << "[2] Ulangi"<<endl;
-									
+
 									cout << "  Pilih : ";
 									cin >> pil_bay;
 								}while(pil_bay!='1');
 							simpanzkt(pil_zkt,id_pem, tempmas, tempprof, &L);
                                 }
 								}else{
-									cout << "-----------------------------------" << endl;
-									cout << "Tekan tombol sembarang untuk kembali ke menu sebelumnya"<<endl;
+									cout << " -----------------------------------" << endl;
+									cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya"<<endl;
 									getch();
-									
+
 								};
-								
-								
-								
 							break;
-						case 5:
+						case '5':
 							system("cls");
-							cout << "-----------------------------------" << endl;
+							cout << " -----------------------------------" << endl;
 							cout << " Menu > Amil Zakat > Simpan" << endl;
-							cout << "-----------------------------------" << endl;
+							cout << " -----------------------------------" << endl;
 							svallbayar(L);
-							cout << "Data berhasil disimpan"<<endl;
-							cout << "-----------------------------------" << endl;
-							cout << "Tekan tombol sembarang untuk kembali ke menu sebelumnya"<<endl;
+							cout << " Data berhasil disimpan"<<endl;
+							cout << " -----------------------------------" << endl;
+							cout << " Tekan tombol sembarang untuk kembali ke menu sebelumnya"<<endl;
 							getch();
 							break;
-						case 6:
+						case '6':
 							break;
 						default:
-							cout << "Pilihan yang anda masukan tidak terdaftar"<<endl;
-							cout << "Tekan 	tombol sembarang untuk kembali ke menu awal"<< endl;
+							cout << " Pilihan yang anda masukan tidak terdaftar"<<endl;
+							cout << " Tekan tombol sembarang untuk kembali ke menu awal"<< endl;
 							getch();
 							break;
 					}
 
-				}while(menu_sub!=6);
+				}while(menu_sub!='6');
 				break;
-			case 4 :
+			case '4' :
 				id = lastid(L);
 				sv_hid(id,L);
 				hapussemua(&L);
@@ -2209,13 +2210,13 @@ int main(int argc, char** argv) {
 				cout << " Tekan Tombol sembarang untuk kembali ke menu.. ";
 				getch();
 				break;
-
 		}
-	}while(menu != 4);
-	
+	}while(menu != '4');
+
 hapussemua(&L);
 
 	return 0;
 }
+
 
 
